@@ -97,7 +97,7 @@ app.post("/users/login", async (req, res) => {
       });
     }
 
-    const correctPassword = await bcrypt.compare(password, user.password);
+    const correctPassword = await bcrypt.compare(hashpassword, user.password);
 
     if (!correctPassword) {
       return res.status(403).json({
