@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "8bfb5c5f-00ac-49c7-bcf9-2abda77f7848",
+		"name": "auth-service-nodejs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14112596"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"rohit\",\r\n    \"password\":\"dwdasdws123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/users/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/posts"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users/profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/users/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"rohit\",\r\n    \"password\":\"dwdasdws123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users/logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "localhost:3000/users/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"c++ blogs\",\r\n    \"content\":\"hello c++\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/posts"
+			},
+			"response": []
+		}
+	]
+}

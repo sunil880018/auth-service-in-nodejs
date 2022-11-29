@@ -1,7 +1,6 @@
 {
   "name": "auth-service",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "abbrev": "^1.1.1",
@@ -236,8 +235,18 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunil880018/auth-service-in-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sunil880018/auth-service-in-nodejs/issues"
+  },
+  "homepage": "https://github.com/sunil880018/auth-service-in-nodejs#readme",
+  "description": ""
 }

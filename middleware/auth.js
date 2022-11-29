@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 exports.protect = async (req, res, next) => {
   try {
-    //         console.log(req.headers)
+            // console.log(req.headers)
     // let token;
     // if (
     //   req.headers.authorization &&
