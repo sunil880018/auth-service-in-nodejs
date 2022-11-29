@@ -21,7 +21,10 @@ exports.protect = async (req, res, next) => {
         message: "not authorized",
       });
     }
-    const decoded = await promisify(jwt.verify)( // decoded token and obtained user id and acces secret token
+    // Verify the token using jwt.verify method
+    // const decoded = jwt.verify(token, config.ACCESS_JWT_SECRET);
+
+    const decoded = await promisify(jwt.verify)( // promisify return promise and decoded token has obtained user id and acces secret token
       token,
       config.ACCESS_JWT_SECRET
     );

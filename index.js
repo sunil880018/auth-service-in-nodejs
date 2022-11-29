@@ -110,12 +110,11 @@ app.post("/users/login", async (req, res) => {
     const currentTime = Date.now();
     const expiresAt = currentTime + 1 * 60 * 60 * 1000;
 
-      // const token = jwt.sign({id: user._id}, 'secret', {
-  //     expiresIn: '1h'
-  // })
+    // JWT sign method is used to creating a token the take are three arguments one is a response object, 
+    // and the second one is a secret key and the last one is an options object for better use of the token.
     const token = jwt.sign(
-      { id: user._id, exp: expiresAt },
-      config.ACCESS_JWT_SECRET
+      { id: user._id, exp: expiresAt }, // data object
+      config.ACCESS_JWT_SECRET // app secrey key
     );
 
     user.password = undefined;
