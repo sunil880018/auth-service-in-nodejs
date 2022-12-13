@@ -15,13 +15,16 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("database connected"));
+  .then(() => console.log("database connected"))
+  .catch((error)=>{
+    console.log(error)
+  })
 
 const app = express();
 
 app.use(
   cors({
-    credentials: true,
+    optionsSuccessStatus: 200,
     origin: "http://localhost:3001",
   })
 );
@@ -34,12 +37,11 @@ app.use(express.json());
 //   })
 // );
 
-app.get("/", protect, (req, res) => {
+app.get("/", async (req, res) => {
   res.send("hello");
 });
 
 app.post("/users/signup", async (req, res) => {
-  console.log(req.body.username)
   const { username, password } = req.body;
   try {
     const hashpassword = await bcrypt.hash(password, 12);
@@ -79,14 +81,11 @@ app.post("/posts", protect, async (req, res) => {
   }
 });
 
-app.get("/users/profile", protect, (req, res) => {
+app.get("/users/profile", protect, async(req, res) => {
   const { user } = req;
   user.password = null;
   res.json({ user });
 });
-
-
-
 
 app.post("/users/login", async (req, res) => {
   const { username, password } = req.body;
@@ -99,9 +98,9 @@ app.post("/users/login", async (req, res) => {
       });
     }
 
-    const correctPassword = await bcrypt.compare(password, user.password);
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
 
-    if (!correctPassword) {
+    if (!isPasswordMatch) {
       return res.status(403).json({
         message: "incorrect username or password",
       });
@@ -110,13 +109,12 @@ app.post("/users/login", async (req, res) => {
     const currentTime = Date.now();
     const expiresAt = currentTime + 1 * 60 * 60 * 1000;
 
-    // JWT sign method is used to creating a token the take are three arguments one is a response object, 
-    // and the second one is a secret key and the last one is an options object for better use of the token.
+    // encoding token
     const token = jwt.sign(
       { id: user._id, exp: expiresAt }, // data object
-      config.ACCESS_JWT_SECRET // app secrey key
+      config.ACCESS_JWT_SECRET // app secret key
     );
-
+    
     user.password = undefined;
     res.cookie("token", token, {
       // expires: new Date(Date.now() + 1*60*60*1000),
@@ -125,8 +123,6 @@ app.post("/users/login", async (req, res) => {
       secure: false, // needs to be true in production
     });
     res.status(200).json({
-      //   tokenType: "Bearer",
-      //   token,
       user,
     });
   } catch (e) {
@@ -137,7 +133,7 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
-app.post("/users/logout", protect, (req, res) => {
+app.post("/users/logout", protect, async (req, res) => {
   res.clearCookie("token");
   return res.json({ message: "successfully logged out" });
 });

@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 exports.protect = async (req, res, next) => {
   try {
-            // console.log(req.headers)
+    // console.log(req.headers)
     // let token;
     // if (
     //   req.headers.authorization &&
@@ -22,13 +22,12 @@ exports.protect = async (req, res, next) => {
       });
     }
     // Verify the token using jwt.verify method
-    // const decoded = jwt.verify(token, config.ACCESS_JWT_SECRET);
-
-    const decoded = await promisify(jwt.verify)( // promisify return promise and decoded token has obtained user id and acces secret token
+    const decodedUserId = await promisify(jwt.verify)(
+      // promisify return promise and decoded token has obtained user id and access secret token
       token,
       config.ACCESS_JWT_SECRET
     );
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decodedUserId.id);
     req.user = user;
   } catch (err) {
     return res.status(401).json({ error: err });
